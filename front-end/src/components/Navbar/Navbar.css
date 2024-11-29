@@ -69,15 +69,14 @@
 
 .dropdown-content {
     position: absolute;
-    display: flex;
-    flex-direction: column;
-    opacity: 0;
+    
+    display: none;
     z-index: 1;
   }
 
-.nav__item i {  
-    margin-left: 1vw;  
-    font-size: 0.7vw;  
+.nav__icon {  
+    margin: 0.2vw 0 0 0.5vw;  
+    font-size: 1vw;  
 }  
 
 .nav__item:hover {  
@@ -108,7 +107,7 @@
 
   }
   
-.nav__item.dropbtn:hover .dropdown-content {
-    opacity: 1;
-
-  }
+  .nav__item.dropbtn:hover .dropdown-content {
+    display: flex;
+    flex-direction: column;
+}

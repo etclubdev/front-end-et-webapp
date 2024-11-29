@@ -1,29 +1,25 @@
 import React, { useState, useEffect } from 'react';
+import { horizontalLogo } from '../../assets/images/logos';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';  
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons';  
 import './Navbar.css';
-import { horizontalLogo } from '../../assets/logos';
 
 export const Navbar = () => {
   const [scrollingDown, setScrollingDown] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0); // Track last scroll position
 
   useEffect(() => {
-    // Handle scroll event
     const handleScroll = () => {
       if (window.scrollY > lastScrollY) {
-        // Scrolling Down
         setScrollingDown(true);
       } else {
-        // Scrolling Up
         setScrollingDown(false);
       }
-      // Update last scroll position
       setLastScrollY(window.scrollY);
     };
 
-    // Add event listener on mount
     window.addEventListener('scroll', handleScroll);
 
-    // Clean up the event listener when the component unmounts
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -40,7 +36,7 @@ export const Navbar = () => {
             <a className="nav__item dropbtn">
                 <div className="nav__item-dropbtn">
                     <p className="nav__item-content">Giới thiệu</p>
-                    <i className="fa-solid fa-angle-down nav__icon" style={{ color: '#ffffff' }}></i>
+                    <FontAwesomeIcon icon={faAngleDown} className="nav__icon" /> 
                 </div>
                 <div class="dropdown-content">
                     <a href="#"><p>Về ET Club</p></a>
@@ -51,7 +47,7 @@ export const Navbar = () => {
             <a className="nav__item dropbtn">
                 <div className="nav__item-dropbtn">
                     <p className="nav__item-content">Hoạt động</p>
-                    <i className="fa-solid fa-angle-down nav__icon" style={{ color: '#ffffff' }}></i>
+                    <FontAwesomeIcon icon={faAngleDown} className="nav__icon" /> 
                 </div>
                 <div class="dropdown-content">
                     <a href="#"><p>Talkshow/Workshop</p></a>

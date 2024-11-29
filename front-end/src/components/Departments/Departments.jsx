@@ -1,14 +1,11 @@
-import Slider from "react-slick";
 import './Departments.css';
-import { event, tech, pr, hr, fer } from "../../assets/profiles";
+import Slider from "react-slick";
+import { useState, useEffect } from "react";
+import { Available } from '../Available';
+import { departmentsData } from "../../mocks/data";
+import { DEPARTMENT_TITLE } from '../../constants.js';    
 
-const departments = [
-    { id: 0, name: "EVENT", img: event },
-    { id: 1, name: "TECH", img: tech },
-    { id: 2, name: "PR", img: pr },
-    { id: 3, name: "HR", img: hr },
-    { id: 4, name: "FER", img: fer },
-];
+const departments = departmentsData.departments;
 
 function PrevArrow(props) {
     const { className, style, onClick } = props;
@@ -30,7 +27,7 @@ function PrevArrow(props) {
     );
   }
 
-  function NextArrow(props) {
+function NextArrow(props) {
     const { className, style, onClick } = props;
     return (
       <div
@@ -68,19 +65,38 @@ export const Departments = () => {
             { breakpoint: 480, settings: { slidesToShow: 3, slidesToScroll: 1 } }   // Kích thước nhỏ hơn 480px  
         ] 
     };
+
+    const [isVisible, setIsVisible] = useState(false);  
+
+    const handleScroll = () => {  
+        const element = document.querySelector('.departments-section');  
+        const position = element.getBoundingClientRect();
+
+        if (position.top < window.innerHeight && position.bottom >= 0) {  
+            setIsVisible(true);  
+        }  
+    };  
+
+    useEffect(() => {  
+        window.addEventListener('scroll', handleScroll);  
+        return () => {  
+            window.removeEventListener('scroll', handleScroll);  
+        };  
+    }, []);
+
     return (
       <div className="departments-section">  
-        <div className="departments-section__title">ĐIỂM GIAO THOA TUYỆT VỜI <br /> GIỮA CÔNG NGHỆ & KINH TẾ</div>  
-        <Slider {...settings}>  
+          <div className="departments-title">{DEPARTMENT_TITLE}</div>  
+          <Slider {...settings}>  
             {departments.map(department => (  
-                <div key={department.id} className="departments-section__department">  
-                    <img src={department.img} alt={department.name} className="departments-section__department-image" />  
-                    <button className="departments-section__button">{"BAN " + department.name}</button>  
-                    <div className="departments-section__hover-overlay">Nội dung hiển thị khi hover</div>  
-                </div>  
+              <div key={department.id} className="department">  
+                <img src={require(`../../mocks${department.image}`)} alt={department.name} className="department-image" />  
+                <button className="department-button">{"BAN " + department.name}</button>  
+                <div className="department-hover-overlay">Nội dung hiển thị khi hover</div>  
+              </div>  
             ))}  
-        </Slider>  
-    </div>
+          </Slider>   
+      </div>
     );
 }
 

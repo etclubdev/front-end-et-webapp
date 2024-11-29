@@ -1,13 +1,10 @@
 import './Characteristics.css';
 import { useEffect, useState } from 'react';
-import { productive, creative, innovative, pioneering } from '../../assets/profiles';
+import { characteristicsData } from '../../mocks/data';
+import { Available } from '../Available';
+import { CHARACTERISTICS_TITLE } from '../../constants';
 
-const etDescItems = [
-    {id: 0, title: "NĂNG ĐỘNG", img: productive, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."},
-    {id: 1, title: "SÁNG TẠO", img: creative, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."},
-    {id: 2, title: "ĐỔI MỚI", img: innovative, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."},
-    {id: 3, title: "TIÊN PHONG", img: pioneering, desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."},
-];
+const etDescItems = characteristicsData.characteristics;
 
 export const Characteristics = () => {
 
@@ -17,7 +14,7 @@ export const Characteristics = () => {
         const element = document.querySelector('.characteristics-section');  
         const position = element.getBoundingClientRect();
 
-        if (position.top < window.innerHeight && position.bottom >= 0) {  
+        if (position.top < window.innerHeight - 100 && position.bottom >= 0) {  
             setIsVisible(true);  
         }  
     };  
@@ -30,24 +27,28 @@ export const Characteristics = () => {
     }, []);
 
     return (
-        <div className={`characteristics-section ${isVisible ? 'visible' : ''}`}>  
-            <div className="characteristics-section__heading">  
-                ĐIỂM ĐẾN LÝ TƯỞNG CHO SINH VIÊN<br />ĐAM MÊ ỨNG DỤNG KHOA HỌC CÔNG NGHỆ  
-            </div>  
+        <div className={'characteristics-section'}>  
+            <Available when={isVisible} parentClassName={'characteristics-section'}
+                children={
+                    <>
+                        <div className="characteristics-heading">{CHARACTERISTICS_TITLE.firstPart}<br/>{CHARACTERISTICS_TITLE.secondPart}</div>  
 
-            <div className="characteristics-section__items">  
-                {  
-                    etDescItems.map((item, id) => {  
-                        return (  
-                            <div key={`desc-${id}`} className="characteristics-section__item">  
-                                <img src={item.img} alt={item.title} className="characteristics-section__item-image" />  
-                                <div className="characteristics-section__item-title">{item.title}</div>  
-                                <div className="characteristics-section__item-desc">{item.desc}</div>  
-                            </div>  
-                        );  
-                    })  
-                }  
-            </div>  
+                        <div className="characteristics-items">  
+                            {  
+                                etDescItems.map((item, id) => {  
+                                    return (  
+                                        <div key={`desc-${id}`} className="characteristics-item">  
+                                            <img src={require(`../../mocks${item.image}`)} alt={item.title} className="characteristics-item-image" />  
+                                            <div className="characteristics-item-title">{item.title}</div>  
+                                            <div className="characteristics-item-desc">{item.desc}</div>  
+                                        </div>  
+                                    );  
+                                })  
+                            }  
+                        </div> 
+                    </>
+                }
+            /> 
         </div>
     )
 }

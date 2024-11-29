@@ -1,27 +1,27 @@
 @font-face {
     font-family: "EurostileDemi";
-    src: url("./fonts/Eurostile/SFUEurostileDemi.TTF");
+    src: url("./assets/fonts/Eurostile/SFUEurostileDemi.TTF");
     font-weight: bold;  
     font-style: bold;  
   }
   
   @font-face {
     font-family: "EurostileRegular";
-    src: url("./fonts/Eurostile/SFUEurostileRegular.TTF");
+    src: url("./assets/fonts/Eurostile/SFUEurostileRegular.TTF");
     font-weight: normal;  
     font-style: normal;  
   }
   
   @font-face {
     font-family: "EurostileBoldOblique";
-    src: url("./fonts/Eurostile/SFUEurostileBoldOblique.TTF");
+    src: url("./assets/fonts/Eurostile/SFUEurostileBoldOblique.TTF");
     font-weight: normal;  
     font-style: normal;  
   }
   
   @font-face {
     font-family: "EurostileBoldExtendedTwo";
-    src: url("./fonts/Eurostile/SFUEurostileBoldExtendedTwo.TTF");
+    src: url("./assets/fonts/Eurostile/SFUEurostileBoldExtendedTwo.TTF");
     font-weight: normal;  
     font-style: normal;  
   }

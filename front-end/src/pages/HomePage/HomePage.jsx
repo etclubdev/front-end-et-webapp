@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
-
 import './HomePage.css';
+import { useEffect, useRef } from 'react';
 import { Navbar } from '../../components/Navbar';
 import { AboutUsSection } from '../../components/AboutUsSection';
 import { Statistics } from '../../components/Statistics';
@@ -10,9 +9,6 @@ import { Characteristics } from '../../components/Characteristics';
 import { Partners } from '../../components/Partners/Partners';
 import { Footer } from '../../components/Footer';
 import { Introduction } from '../../components/Introduction';
-
-import { noTextLogo, item } from '../../assets/logos';
-
 
 export const HomePage = () => {  
 
@@ -36,15 +32,24 @@ export const HomePage = () => {
   useEffect(() => {  
       for (let i = 0; i < 100; i++) {  
           createStar();  
-      }  
-  }, []); 
+      }        
+
+    }, []);
+    
+  const myRef = useRef(null);
+
+  const scrollToRef = () => {
+    if (myRef.current) {
+      myRef.current.scrollIntoView({ behavior: 'smooth'});
+    }
+  }
 
   return (  
     <div className="homepage-section">
       <Navbar/>
-      <Introduction/>
+      <Introduction scrollToRef={scrollToRef}/>
       <div className="homepage__container">
-        <AboutUsSection/>
+        <AboutUsSection myRef={myRef}/>
         <Characteristics/>
         <Statistics/>
         <Departments/>
